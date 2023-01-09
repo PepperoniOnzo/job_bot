@@ -1,12 +1,17 @@
 import 'dart:io';
 
+import 'package:html/dom.dart';
 import 'package:job_bot/data/link_data.dart';
 import 'package:job_bot/data/parsed_data.dart';
 import 'package:job_bot/data/user_data.dart';
 import 'package:job_bot/enums/day_time.dart';
 import 'package:job_bot/enums/site_type.dart';
 import 'package:job_bot/services/data_manager.dart';
+import 'package:job_bot/services/site_parser.dart';
+import 'package:job_bot/services/validator.dart';
 import 'package:test/test.dart';
+
+import 'package:html/parser.dart';
 
 void main() {
   group('Data tests', () {
@@ -142,6 +147,52 @@ void main() {
       expect(dataManager.users.first.links.first.siteType, SiteType.dou);
       expect(dataManager.users.first.links.first.parsed.first.title, 'title');
       expect(dataManager.users.first.links.first.parsed.first.link, 'link');
+    });
+  });
+
+  group('Services', () {
+    String pathDjinni = 'test/mocks/djinni.html';
+    String pathDou = 'test/mocks/dou.html';
+    test('Validator', () {
+      expect(
+          Validator.validate(
+              'https://djinni.co/jobs/keyword-flutter/?exp_level=1y&employment=remote'),
+          true);
+      expect(
+          Validator.validate(
+              'https/djinni.co/jobs/keyword-flutter/?exp_level=1y&employment=remote'),
+          false);
+      expect(Validator.validate('https://djinni.co'), true);
+    });
+    test('Site parser djinni', () {
+      File file = File(pathDjinni);
+      String html = file.readAsStringSync();
+      Document document = parse(html);
+
+      var tittles = document.getElementsByClassName('profile');
+      expect(tittles.length, 7);
+
+      var links = document
+          .getElementsByClassName('profile')
+          .where((element) => element.attributes.containsKey('href'))
+          .map((e) => e.attributes['href'])
+          .toList();
+      expect(links.length, 7);
+    });
+    test('Site parser dou', () {
+      File file = File(pathDou);
+      String html = file.readAsStringSync();
+      Document document = parse(html);
+
+      var tittles = document.getElementsByClassName('vt');
+      expect(tittles.length, 3);
+
+      var links = document
+          .getElementsByClassName('vt')
+          .where((element) => element.attributes.containsKey('href'))
+          .map((e) => e.attributes['href'])
+          .toList();
+      expect(links.length, 3);
     });
   });
 }
