@@ -7,10 +7,9 @@ class Validator {
     if (!Uri.parse(link).isAbsolute) return false;
 
     // Check if bot support this link
-    if (!link.contains(SiteType.dou.toString()) ||
-        !link.contains(SiteType.djinni.toString())) return false;
+    if (link.contains(SiteType.dou.toString()) ||
+        link.contains(SiteType.djinni.toString())) return true;
 
-    // All checks passed
-    return true;
+    return false;
   }
 }
