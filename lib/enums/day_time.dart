@@ -38,4 +38,9 @@ enum DayTime {
         return Configuration.morning;
     }
   }
+
+  @override
+  String toString() {
+    return name;
+  }
 }
