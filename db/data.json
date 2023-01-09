@@ -1,0 +1,23 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "subscribedTimes": [
+                "morning",
+                "evening"
+            ],
+            "links": [
+                {
+                    "link": "link",
+                    "siteType": "dou",
+                    "parsed": [
+                        {
+                            "title": "title",
+                            "link": "link"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
