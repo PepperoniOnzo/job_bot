@@ -15,6 +15,17 @@ class SiteParser {
     }
   }
 
+  /// Get site type
+  SiteType getSiteType(String link) {
+    if (link.contains('djinni')) {
+      return SiteType.djinni;
+    } else if (link.contains('dou')) {
+      return SiteType.dou;
+    } else {
+      return SiteType.unknown;
+    }
+  }
+
   /// Depending on the site type, the method will return a list of parsed data
   Future<List<ParsedData>> getSite(String link, SiteType siteType) async {
     switch (siteType) {

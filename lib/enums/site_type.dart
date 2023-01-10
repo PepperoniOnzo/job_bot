@@ -1,7 +1,8 @@
 /// Avalaible sites
 enum SiteType {
   djinni,
-  dou;
+  dou,
+  unknown;
 
   @override
   String toString() {

@@ -3,6 +3,12 @@ class ParsedData {
 
   ParsedData(this.title, this.link);
 
+
+  @override
+  String toString() {
+    return '$title\n$link';
+  }
+
   /// Creates a [ParsedData] object from a [Map]
   factory ParsedData.fromJson(Map<String, dynamic> json) => ParsedData(
         json['title'],

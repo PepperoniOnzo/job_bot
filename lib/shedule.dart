@@ -5,7 +5,7 @@ import 'package:job_bot/enums/day_time.dart';
 import 'services/int_to_time.dart';
 
 class Shedule {
-  late StreamController controller;
+  late StreamController<DayTime> controller;
   late DayTime currentDayTime;
 
   void initShedule() {

@@ -83,6 +83,7 @@ void main() {
             ],
           }
         ],
+        'menuState': 'main'
       });
 
       expect(data.id, 1);
@@ -93,6 +94,7 @@ void main() {
       expect(data.links.first.siteType, SiteType.dou);
       expect(data.links.first.parsed.first.title, 'title');
       expect(data.links.first.parsed.first.link, 'link');
+      expect(data.menuState.toString(), 'main');
 
       Map<String, dynamic> json = data.toJson();
 
@@ -109,6 +111,7 @@ void main() {
           }
         ],
       });
+      expect(json['menuState'], 'main');
     });
     test('Data manager file not exist', () {
       DataManager dataManager = DataManager(path: path);
@@ -132,6 +135,7 @@ void main() {
             ],
           }
         ],
+        'menuState': 'main'
       }));
 
       data.save(path: path);
@@ -147,6 +151,7 @@ void main() {
       expect(dataManager.users.first.links.first.siteType, SiteType.dou);
       expect(dataManager.users.first.links.first.parsed.first.title, 'title');
       expect(dataManager.users.first.links.first.parsed.first.link, 'link');
+      expect(dataManager.users.first.menuState.toString(), 'main');
     });
   });
 
