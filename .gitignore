@@ -2,5 +2,8 @@
 .dart_tool/
 .packages
 
+# Hiden configuration
+.lib/constants/hiden_configuration.dart
+
 # Conventional directory for build output.
 build/
