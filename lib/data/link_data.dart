@@ -1,4 +1,3 @@
-import 'package:html/parser.dart';
 import 'package:job_bot/data/parsed_data.dart';
 import 'package:job_bot/enums/site_type.dart';
 import 'package:job_bot/services/site_parser.dart';
