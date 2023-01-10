@@ -1,6 +1,8 @@
+import 'package:job_bot/constants/hiden_configuration.dart';
+
 class Configuration {
   /// Telegram bot token
-  static const String token = '';
+  static const String token = HidenConfigurations.token;
 
   /// Save data path
   static const String saveDataPath = 'db/data.json';
