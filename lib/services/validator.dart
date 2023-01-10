@@ -4,7 +4,11 @@ class Validator {
   /// Validate a link
   static bool validate(String link) {
     // Check if valid URL
-    if (!Uri.parse(link).isAbsolute) return false;
+    try {
+      if (!Uri.parse(link).isAbsolute) return false;
+    } catch (e) {
+      return false;
+    }
 
     // Check if bot support this link
     if (link.contains(SiteType.dou.toString()) ||

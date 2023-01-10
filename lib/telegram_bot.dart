@@ -88,24 +88,23 @@ class TelegramBot with SiteParser {
 
     teledart.onCommand('set_time').listen((message) {
       if (dataManager.isUserExist(message.chat.id)) {
-        message.replyMarkup = InlineKeyboardMarkup(inlineKeyboard: [
+        ReplyKeyboardMarkup replyMarkup = ReplyKeyboardMarkup(keyboard: [
           [
-            InlineKeyboardButton(text: 'Morning', callbackData: 'morning'),
-            InlineKeyboardButton(text: 'Afternoon', callbackData: 'afternoon'),
-            InlineKeyboardButton(text: 'Evening', callbackData: 'evening'),
-            InlineKeyboardButton(text: 'Night', callbackData: 'Night'),
+            KeyboardButton(text: 'Morning'),
+            KeyboardButton(text: 'Afternoon'),
+            KeyboardButton(text: 'Evening'),
+            KeyboardButton(text: 'Night'),
           ]
-        ]);
-        message.reply(BotStrings.setTime);
+        ], resizeKeyboard: true, oneTimeKeyboard: false);
+        message.reply(BotStrings.setTime, replyMarkup: replyMarkup);
       } else {
         message.reply(BotStrings.subscribeError);
       }
     });
 
-    teledart.onMessage(keyword: 'morning').listen((message) {
+    teledart.onMessage(keyword: 'Morning').listen((message) {
       if (!dataManager.isUserExist(message.chat.id)) {
         message.reply(BotStrings.subscribeError);
-        dataManager.save();
         return;
       }
 
@@ -116,10 +115,9 @@ class TelegramBot with SiteParser {
       }
     });
 
-    teledart.onMessage(keyword: 'afternoon').listen((message) {
+    teledart.onMessage(keyword: 'Afternoon').listen((message) {
       if (!dataManager.isUserExist(message.chat.id)) {
         message.reply(BotStrings.subscribeError);
-        dataManager.save();
         return;
       }
 
@@ -130,10 +128,9 @@ class TelegramBot with SiteParser {
       }
     });
 
-    teledart.onMessage(keyword: 'evening').listen((message) {
+    teledart.onMessage(keyword: 'Evening').listen((message) {
       if (!dataManager.isUserExist(message.chat.id)) {
         message.reply(BotStrings.subscribeError);
-        dataManager.save();
         return;
       }
 
@@ -144,7 +141,7 @@ class TelegramBot with SiteParser {
       }
     });
 
-    teledart.onMessage(keyword: 'night').listen((message) {
+    teledart.onMessage(keyword: 'Night').listen((message) {
       if (!dataManager.isUserExist(message.chat.id)) {
         message.reply(BotStrings.subscribeError);
         return;
@@ -152,7 +149,6 @@ class TelegramBot with SiteParser {
 
       if (dataManager.addDayTime(DayTime.night, message.chat.id)) {
         message.reply(BotStrings.setTimeSuccess);
-        dataManager.save();
       } else {
         message.reply(BotStrings.setTimeUndo);
       }
@@ -167,15 +163,18 @@ class TelegramBot with SiteParser {
       message.reply(BotStrings.setSite);
 
       dataManager.setMenuState(MenuState.site, message.chat.id);
+      dataManager.save();
     });
 
     teledart.onMessage(entityType: 'url').listen((message) {
       if (!dataManager.isUserExist(message.chat.id)) return;
       if (dataManager.getMenuState(message.chat.id) == MenuState.site) {
-        if (Validator.validate(message.entities![0].url ?? '')) {
-          dataManager.setSite(message.entities![0].url ?? '', message.chat.id);
+        if (Validator.validate(message.text ?? '')) {
+          dataManager.setSite(message.text ?? '', message.chat.id);
           message.reply(BotStrings.setSiteSuccess);
           dataManager.setMenuState(MenuState.main, message.chat.id);
+
+          dataManager.save();
         } else {
           message.reply(BotStrings.setSiteError);
         }
@@ -193,10 +192,12 @@ class TelegramBot with SiteParser {
         message.reply(BotStrings.subscribeError);
         return;
       }
-
-      message.reply(BotStrings.pressBack);
+      ReplyMarkup replyMarkup = ReplyKeyboardRemove(removeKeyboard: true);
+      message.reply(BotStrings.pressBack, replyMarkup: replyMarkup);
 
       dataManager.setMenuState(MenuState.main, message.chat.id);
+
+      dataManager.save();
     });
 
     subscription = stream.listen((event) {

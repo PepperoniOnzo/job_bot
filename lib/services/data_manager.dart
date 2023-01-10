@@ -29,7 +29,7 @@ class DataManager {
 
   /// Add new user to [DataManager]
   bool addUser(int id) {
-    if (!isUserExist(id)) return false;
+    if (isUserExist(id)) return false;
 
     users.add(UserData.newUser(id));
     save();

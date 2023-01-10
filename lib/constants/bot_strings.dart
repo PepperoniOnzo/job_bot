@@ -2,9 +2,9 @@ import 'package:job_bot/enums/site_type.dart';
 
 class BotStrings {
   static final String start =
-      "You can use this bot for announcements about jobs from sites"
+      "You can use this bot for announcements about jobs from sites "
       "${SiteType.djinni.name} and ${SiteType.dou.name}.\n"
-      "To start send command /subscription.\n\n"
+      "To start send command /subscribe.\n\n"
       "To get help, use the /help command.";
 
   static final String setSite = 'Paste site link. Example:'

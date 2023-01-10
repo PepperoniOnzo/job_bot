@@ -7,7 +7,6 @@ import 'package:job_bot/data/user_data.dart';
 import 'package:job_bot/enums/day_time.dart';
 import 'package:job_bot/enums/site_type.dart';
 import 'package:job_bot/services/data_manager.dart';
-import 'package:job_bot/services/site_parser.dart';
 import 'package:job_bot/services/validator.dart';
 import 'package:test/test.dart';
 
