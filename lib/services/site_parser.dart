@@ -41,7 +41,7 @@ class SiteParser {
           List<String?> links = document
               .getElementsByClassName('profile')
               .where((element) => element.attributes.containsKey('href'))
-              .map((e) => 'https://djinni.co/${e.attributes['href']!}')
+              .map((e) => 'https://djinni.co${e.attributes['href']!}')
               .toList();
 
           if (titles.length == links.length) {

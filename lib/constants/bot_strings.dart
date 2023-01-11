@@ -7,7 +7,7 @@ class BotStrings {
       "To start send command /subscribe.\n\n"
       "To get help, use the /help command.";
 
-  static final String setSite = 'Paste site link. Example:'
+  static final String setSite = 'Paste site link. Example: '
       'https://djinni.co/jobs/keyword-flutter/?exp_level=1y&employment=remote \n\n'
       'Acceptable sites ${SiteType.djinni.name} and ${SiteType.dou.name}.';
 
@@ -16,7 +16,9 @@ class BotStrings {
       '1. Morning (12:00)\n'
       '2. Afternoon (15:00)\n'
       '3. Evening (18:00)\n'
-      '4. Night (21:00)';
+      '4. Night (21:00)\n\n'
+      'To delete time, press on it again.\n'
+      'Use /back to return to main menu.';
 
   static final String setTimeSuccess = 'Successfully set time';
   static final String setTimeUndo = 'Successfully deleted time';
@@ -38,9 +40,7 @@ class BotStrings {
 
   static const String pressBack = 'Back button to return to main menu';
 
-  static const String pleasePressBack = 'Please send url or press /back';
-
   static const String setSiteSuccess = 'Successfully set site';
 
-  static const String setSiteError = 'Error setting site';
+  static const String setSiteError = 'Please send url or press /back';
 }

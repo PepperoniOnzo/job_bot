@@ -60,7 +60,7 @@ class DataManager {
 
   /// Save the data by the path [Configuration.saveDataPath]
   save({String path = Configuration.saveDataPath}) {
-    File(path).writeAsStringSync(jsonEncode(toJson()));
+    File(path).writeAsString(jsonEncode(toJson()));
   }
 
   /// Creates a [Map] from a [DataManager] object

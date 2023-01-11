@@ -13,12 +13,15 @@ class LinkData {
     SiteParser parser = SiteParser();
     List<ParsedData> newData = await parser.getSite(link, siteType);
 
-    return parsed.length == newData.length &&
-        parsed.every((element) => newData.contains(element));
+    if (parsed.length == newData.length &&
+        parsed.every((element) => newData.contains(element))) return false;
+
+    parsed = newData;
+    return true;
   }
 
   @override
-  toString() async {
+  String toString() {
     return 'Vacancies on ${siteType.toString()}\n$link\n\n${parsed.map((e) => e.toString()).join('\n\n')}';
   }
 

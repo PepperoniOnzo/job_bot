@@ -25,6 +25,7 @@ class TelegramBot with SiteParser {
       for (var link in data.links) {
         if (await link.compareData()) {
           teledart.sendMessage(data.id, link.toString());
+          dataManager.save();
         }
       }
     }
@@ -163,7 +164,6 @@ class TelegramBot with SiteParser {
       message.reply(BotStrings.setSite);
 
       dataManager.setMenuState(MenuState.site, message.chat.id);
-      dataManager.save();
     });
 
     teledart.onMessage(entityType: 'url').listen((message) {
@@ -178,8 +178,6 @@ class TelegramBot with SiteParser {
         } else {
           message.reply(BotStrings.setSiteError);
         }
-      } else {
-        message.reply(BotStrings.pleasePressBack);
       }
     });
 
