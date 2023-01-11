@@ -5,5 +5,9 @@
 # Hiden configuration
 lib/constants/hiden_configuration.dart
 
+# Hiden test mocks
+test/mocks/djinni.html
+test/mocks/dou.html
+
 # Conventional directory for build output.
 build/

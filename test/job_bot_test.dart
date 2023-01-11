@@ -155,8 +155,8 @@ void main() {
   });
 
   group('Services', () {
-    String pathDjinni = 'test/mocks/djinni.html';
-    String pathDou = 'test/mocks/dou.html';
+    // String pathDjinni = 'test/mocks/djinni.html';
+    // String pathDou = 'test/mocks/dou.html';
     test('Validator', () {
       expect(
           Validator.validate(
@@ -168,35 +168,35 @@ void main() {
           false);
       expect(Validator.validate('https://djinni.co'), true);
     });
-    test('Site parser djinni', () {
-      File file = File(pathDjinni);
-      String html = file.readAsStringSync();
-      Document document = parse(html);
+    // test('Site parser djinni', () {
+    //   File file = File(pathDjinni);
+    //   String html = file.readAsStringSync();
+    //   Document document = parse(html);
 
-      var tittles = document.getElementsByClassName('profile');
-      expect(tittles.length, 7);
+    //   var tittles = document.getElementsByClassName('profile');
+    //   expect(tittles.length, 7);
 
-      var links = document
-          .getElementsByClassName('profile')
-          .where((element) => element.attributes.containsKey('href'))
-          .map((e) => e.attributes['href'])
-          .toList();
-      expect(links.length, 7);
-    });
-    test('Site parser dou', () {
-      File file = File(pathDou);
-      String html = file.readAsStringSync();
-      Document document = parse(html);
+    //   var links = document
+    //       .getElementsByClassName('profile')
+    //       .where((element) => element.attributes.containsKey('href'))
+    //       .map((e) => e.attributes['href'])
+    //       .toList();
+    //   expect(links.length, 7);
+    // });
+    // test('Site parser dou', () {
+    //   File file = File(pathDou);
+    //   String html = file.readAsStringSync();
+    //   Document document = parse(html);
 
-      var tittles = document.getElementsByClassName('vt');
-      expect(tittles.length, 3);
+    //   var tittles = document.getElementsByClassName('vt');
+    //   expect(tittles.length, 3);
 
-      var links = document
-          .getElementsByClassName('vt')
-          .where((element) => element.attributes.containsKey('href'))
-          .map((e) => e.attributes['href'])
-          .toList();
-      expect(links.length, 3);
-    });
+    //   var links = document
+    //       .getElementsByClassName('vt')
+    //       .where((element) => element.attributes.containsKey('href'))
+    //       .map((e) => e.attributes['href'])
+    //       .toList();
+    //   expect(links.length, 3);
+    // });
   });
 }
