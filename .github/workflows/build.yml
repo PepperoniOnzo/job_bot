@@ -14,8 +14,9 @@ jobs:
       - uses: actions/checkout@v3
        
       - name: Decode base64 secrets
-        working-directory: ./lib/constants
-        run: echo $SECRETS_FILE_CONFIGURATIONS | base64 --decode > hiden_configuration.dart
+        # working-directory: ./lib/constants
+        # run: echo $SECRETS_FILE_CONFIGURATIONS | base64 --decode > hiden_configuration.dart
+        run: dir
         env:
           SECRETS_FILE_CONFIGURATIONS: ${{ secrets.SECRETS_FILE_CONFIGURATIONS }}
           
