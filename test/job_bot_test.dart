@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:html/dom.dart';
 import 'package:job_bot/data/link_data.dart';
 import 'package:job_bot/data/parsed_data.dart';
 import 'package:job_bot/data/user_data.dart';
@@ -10,7 +9,8 @@ import 'package:job_bot/services/data_manager.dart';
 import 'package:job_bot/services/validator.dart';
 import 'package:test/test.dart';
 
-import 'package:html/parser.dart';
+// import 'package:html/parser.dart';
+// import 'package:html/dom.dart';
 
 void main() {
   group('Data tests', () {

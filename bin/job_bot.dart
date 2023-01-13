@@ -1,4 +1,4 @@
-import 'package:job_bot/shedule.dart';
+import 'package:job_bot/schedule.dart';
 import 'package:job_bot/telegram_bot.dart';
 
 void main() async {
