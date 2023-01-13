@@ -12,12 +12,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
-      
+       
       - name: Decode base64 secrets
-        run: echo $SECRETS_FILE_CONFIGURATIONS | base64 --decode > lib/constants/hiden_configuration.dart
+        working-directory: ./lib/constants
+        run: echo $SECRETS_FILE_CONFIGURATIONS | base64 --decode > hiden_configuration.dart
         env:
           SECRETS_FILE_CONFIGURATIONS: ${{ secrets.SECRETS_FILE_CONFIGURATIONS }}
+          
+      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
           
       - name: Install dependencies
         run: dart pub get
