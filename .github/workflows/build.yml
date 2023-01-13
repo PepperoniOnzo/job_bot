@@ -15,7 +15,7 @@ jobs:
       - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
       
       - name: Decode base64 secrets
-        run: echo $SECRETS_FILE_CONFIGURATIONS | base64 -d > lib/constants/hiden_configuration.dart
+        run: echo $SECRETS_FILE_CONFIGURATIONS | base64 --decode > lib/constants/hiden_configuration.dart
         env:
           SECRETS_FILE_CONFIGURATIONS: ${{ secrets.SECRETS_FILE_CONFIGURATIONS }}
           
