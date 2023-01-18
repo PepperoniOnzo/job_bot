@@ -1,0 +1,51 @@
+name: Dart tests
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Tests
+      - uses: actions/checkout@v3
+       
+      - name: Decode base64 secrets
+        run: echo $SECRETS_FILE_CONFIGURATIONS | base64 -di > lib/constants/hiden_configuration.dart
+        env:
+          SECRETS_FILE_CONFIGURATIONS: ${{ secrets.SECRETS_FILE_CONFIGURATIONS }}
+          
+      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+          
+      - name: Install dependencies
+        run: dart pub get
+        
+      - name: Analyze project source
+        run: dart analyze
+        
+      - name: Run tests
+        run: dart test
+        
+      # Docker build and push
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: user/app:latest
